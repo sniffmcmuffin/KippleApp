@@ -1,15 +1,16 @@
-﻿@inherits LayoutComponentBase
+﻿@using KippleApp.Services
+@inherits LayoutComponentBase
+@implements IDisposable
+@inject IJSRuntime JS
 
 <div class="page">
     <div class="sidebar">
         <NavMenu />
     </div>
-
     <main>
         <div class="top-row px-4">
             <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
         </div>
-
         <article class="content px-4">
             @Body
         </article>
@@ -21,3 +22,19 @@
     <a href="." class="reload">Reload</a>
     <span class="dismiss">🗙</span>
 </div>
+
+@code {
+    [Inject] private ThemeService ThemeService { get; set; } = default!;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var saved = await JS.InvokeAsync<string>("getTheme");
+            await JS.InvokeVoidAsync("setTheme", saved);
+            ThemeService.SetTheme(saved);
+        }
+    }
+
+    public void Dispose() { }
+}

@@ -1,7 +1,7 @@
-using KippleApp.Client.Pages;
 using KippleApp.Components;
 using KippleApp.Components.Account;
 using KippleApp.Data;
+using KippleApp.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +46,7 @@ namespace KippleApp
                 .AddDefaultTokenProviders();
 
             builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
+            builder.Services.AddScoped<ThemeService>();
 
             var app = builder.Build();
 
