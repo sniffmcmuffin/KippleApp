@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="KippleApp/KippleApp.Client/KippleApp.Client.csproj" />
+  <Project Path="KippleApp/KippleApp/KippleApp.csproj" />
+  <Project Path="Tests/Tests.csproj" />
+</Solution>
